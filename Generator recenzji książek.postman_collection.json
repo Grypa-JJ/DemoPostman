@@ -1,0 +1,85 @@
+{
+	"info": {
+		"_postman_id": "3f9e5d00-37dc-4631-8aac-3e2c8a74ad98",
+		"name": "Generator recenzji książek",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27056750"
+	},
+	"item": [
+		{
+			"name": "Dodawanie posta z recenzją",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Check author\", function(){",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.author).to.eql(pm.environment.get(\"autor\"));",
+							"});",
+							"",
+							"pm.test(\"Check title\", function(){",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.title).to.eql(pm.environment.get(\"tytul\"));",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"autor\", pm.iterationData.get(\"autor\"));\r",
+							"pm.environment.set(\"tytul\", pm.iterationData.get(\"tytul\"));\r",
+							"\r",
+							"console.log(\"Autor: \", pm.environment.get(\"autor\"));\r",
+							"console.log(\"Tytul: \", pm.environment.get(\"tytul\"));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"title\": \"{{tytul}}\",\n        \"author\": \"{{autor}}\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/posts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"posts"
+					],
+					"query": [
+						{
+							"key": "t",
+							"value": null,
+							"disabled": true
+						}
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		}
+	]
+}

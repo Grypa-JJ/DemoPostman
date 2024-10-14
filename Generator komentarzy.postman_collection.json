@@ -1,0 +1,83 @@
+{
+	"info": {
+		"_postman_id": "de956a0c-c2d1-40c4-9518-d3c57b2f1768",
+		"name": "Generator komentarzy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27056750"
+	},
+	"item": [
+		{
+			"name": "Dodawanie posta z komentarzem",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Check author\", function(){",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.author).to.eql(pm.environment.get(\"autor\"));",
+							"});",
+							"",
+							"pm.test(\"Check title\", function(){",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.title).to.eql(pm.environment.get(\"tytul\"));",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"username\", pm.iterationData.get(\"username\"));\r",
+							"pm.environment.set(\"comment\", pm.iterationData.get(\"comment\"));\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"comment\": \"{{comment}}\",\n        \"username\": \"{{username}}\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/posts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"posts"
+					],
+					"query": [
+						{
+							"key": "t",
+							"value": null,
+							"disabled": true
+						}
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		}
+	]
+}

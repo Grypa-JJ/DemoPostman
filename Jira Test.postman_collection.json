@@ -1,0 +1,336 @@
+{
+	"info": {
+		"_postman_id": "3b7c6277-e3bf-4194-a886-34ddeaef59fe",
+		"name": "Jira Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27056750"
+	},
+	"item": [
+		{
+			"name": "Create Filter",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"let timestamp = Date.now(); // Uzyskanie aktualnego znacznika czasu\r",
+							"let filterName = \"newFilter\" + timestamp; // Łączenie ciągów\r",
+							"pm.environment.set(\"filterName\", filterName); // Ustawienie zmiennej środowiskowej"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Check description', function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.description).to.eql('blabla')\r",
+							"});\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "a",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "a",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{filterName}}\",\r\n    \"description\": \"blabla\",\r\n    \"jql\": \"project = KAN AND type IN (Epik, Task) AND status = \\\"In Progress\\\" AND assignee = currentUser() ORDER BY created DESC\",\r\n    \"favourite\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://postmandemo.atlassian.net/rest/api/2/filter",
+					"protocol": "https",
+					"host": [
+						"postmandemo",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"2",
+						"filter"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Filter with the same name",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "a",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "a",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"newFilter1728947052937\",\r\n    \"description\": \"blabla\",\r\n    \"jql\": \"project = KAN AND type IN (Epik, Task) AND status = \\\"In Progress\\\" AND assignee = currentUser() ORDER BY created DESC\",\r\n    \"favourite\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://postmandemo.atlassian.net/rest/api/2/filter",
+					"protocol": "https",
+					"host": [
+						"postmandemo",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"2",
+						"filter"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Filter with the same name Copy",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Check description', function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.description).to.eql('blabla')\r",
+							"});\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "a",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "a",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://postmandemo.atlassian.net/rest/api/2/filter/10007",
+					"protocol": "https",
+					"host": [
+						"postmandemo",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"2",
+						"filter",
+						"10007"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Filter which does not exist",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Check error message', function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.errorMessages[0]).to.eql(\"Wybrany filtr nie jest dostępny; prawdopodobnie został usunięty lub jego uprawnienia uległy zmianie.\")\r",
+							"});\r",
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "a",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "a",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://postmandemo.atlassian.net/rest/api/2/filter/10020",
+					"protocol": "https",
+					"host": [
+						"postmandemo",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"2",
+						"filter",
+						"10020"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

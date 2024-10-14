@@ -1,0 +1,1543 @@
+{
+  "collection": {
+    "_": {
+      "postman_id": "3f9e5d00-37dc-4631-8aac-3e2c8a74ad98",
+      "exporter_id": "27056750"
+    },
+    "item": [
+      {
+        "id": "daeca2eb-0a1c-4c7d-ba43-7455549717e4",
+        "name": "Dodawanie posta z recenzją",
+        "request": {
+          "description": {
+            "content": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code.",
+            "type": "text/plain"
+          },
+          "url": {
+            "protocol": "http",
+            "port": "3000",
+            "path": [
+              "posts"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [
+              {
+                "disabled": true,
+                "key": "t",
+                "value": null
+              }
+            ],
+            "variable": []
+          },
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\n        \"title\": \"{{tytul}}\",\n        \"author\": \"{{autor}}\"\n    }",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "12e4682c-732f-495e-af8d-1df86f311d49",
+              "type": "text/javascript",
+              "packages": {},
+              "exec": [
+                "pm.test(\"Successful POST request\", function () {",
+                "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                "});",
+                "",
+                "",
+                "pm.test(\"Check author\", function(){",
+                "    var jsonData = pm.response.json();",
+                "    pm.expect(jsonData.author).to.eql(pm.environment.get(\"autor\"));",
+                "});",
+                "",
+                "pm.test(\"Check title\", function(){",
+                "    var jsonData = pm.response.json();",
+                "    pm.expect(jsonData.title).to.eql(pm.environment.get(\"tytul\"));",
+                "});"
+              ],
+              "_lastExecutionId": "f0b5f1b1-fd0e-45e8-b50e-b3f10eac5532"
+            }
+          },
+          {
+            "listen": "prerequest",
+            "script": {
+              "id": "6bef130f-02fa-463a-b01a-8e345d88e917",
+              "type": "text/javascript",
+              "packages": {},
+              "exec": [
+                "pm.environment.set(\"autor\", pm.iterationData.get(\"autor\"));\r",
+                "pm.environment.set(\"tytul\", pm.iterationData.get(\"tytul\"));\r",
+                "\r",
+                "console.log(\"Autor: \", pm.environment.get(\"autor\"));\r",
+                "console.log(\"Tytul: \", pm.environment.get(\"tytul\"));"
+              ],
+              "_lastExecutionId": "1955e5c8-ab4a-4e45-a96f-1d5f7a62865a"
+            }
+          }
+        ]
+      }
+    ],
+    "event": [],
+    "variable": [],
+    "info": {
+      "_postman_id": "3f9e5d00-37dc-4631-8aac-3e2c8a74ad98",
+      "name": "Generator recenzji książek",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    }
+  },
+  "environment": {
+    "_": {
+      "postman_variable_scope": "environment",
+      "postman_exported_at": "2024-10-14T21:44:44.782Z",
+      "postman_exported_using": "Postman/11.16.1"
+    },
+    "id": "edf91b3e-9212-4b14-83a3-63198e7c6e7a",
+    "name": "DEV",
+    "values": [
+      {
+        "type": "any",
+        "value": "127.0.0.1",
+        "key": "{{host}}"
+      },
+      {
+        "type": "any",
+        "value": "\"title = DEV\"",
+        "key": "title"
+      },
+      {
+        "type": "any",
+        "value": "Remigiusz Mróz",
+        "key": "autor"
+      },
+      {
+        "type": "any",
+        "value": "Zerwa",
+        "key": "tytul"
+      }
+    ]
+  },
+  "globals": {
+    "id": "7dd61f9d-a0d0-4f85-bb0e-96b6298d3458",
+    "values": []
+  },
+  "run": {
+    "stats": {
+      "iterations": {
+        "total": 4,
+        "pending": 0,
+        "failed": 0
+      },
+      "items": {
+        "total": 4,
+        "pending": 0,
+        "failed": 0
+      },
+      "scripts": {
+        "total": 8,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequests": {
+        "total": 4,
+        "pending": 0,
+        "failed": 0
+      },
+      "requests": {
+        "total": 4,
+        "pending": 0,
+        "failed": 0
+      },
+      "tests": {
+        "total": 4,
+        "pending": 0,
+        "failed": 0
+      },
+      "assertions": {
+        "total": 12,
+        "pending": 0,
+        "failed": 0
+      },
+      "testScripts": {
+        "total": 4,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequestScripts": {
+        "total": 4,
+        "pending": 0,
+        "failed": 0
+      }
+    },
+    "timings": {
+      "responseAverage": 35,
+      "responseMin": 34,
+      "responseMax": 37,
+      "responseSd": 1.2247448713915892,
+      "dnsAverage": 0,
+      "dnsMin": 0,
+      "dnsMax": 0,
+      "dnsSd": 0,
+      "firstByteAverage": 0,
+      "firstByteMin": 0,
+      "firstByteMax": 0,
+      "firstByteSd": 0,
+      "started": 1728943015663,
+      "completed": 1728943016161
+    },
+    "executions": [
+      {
+        "cursor": {
+          "position": 0,
+          "iteration": 0,
+          "length": 1,
+          "cycles": 4,
+          "empty": false,
+          "eof": false,
+          "bof": true,
+          "cr": false,
+          "ref": "db51d783-8793-41e4-8ca9-667c2b6aa02e",
+          "httpRequestId": "268e86e2-e15b-459f-93a2-4126236f8455"
+        },
+        "item": {
+          "id": "daeca2eb-0a1c-4c7d-ba43-7455549717e4",
+          "name": "Dodawanie posta z recenzją",
+          "request": {
+            "description": {
+              "content": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "http",
+              "port": "3000",
+              "path": [
+                "posts"
+              ],
+              "host": [
+                "localhost"
+              ],
+              "query": [
+                {
+                  "disabled": true,
+                  "key": "t",
+                  "value": null
+                }
+              ],
+              "variable": []
+            },
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n        \"title\": \"{{tytul}}\",\n        \"author\": \"{{autor}}\"\n    }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "12e4682c-732f-495e-af8d-1df86f311d49",
+                "type": "text/javascript",
+                "packages": {},
+                "exec": [
+                  "pm.test(\"Successful POST request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "});",
+                  "",
+                  "",
+                  "pm.test(\"Check author\", function(){",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.author).to.eql(pm.environment.get(\"autor\"));",
+                  "});",
+                  "",
+                  "pm.test(\"Check title\", function(){",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.title).to.eql(pm.environment.get(\"tytul\"));",
+                  "});"
+                ],
+                "_lastExecutionId": "f0b5f1b1-fd0e-45e8-b50e-b3f10eac5532"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "6bef130f-02fa-463a-b01a-8e345d88e917",
+                "type": "text/javascript",
+                "packages": {},
+                "exec": [
+                  "pm.environment.set(\"autor\", pm.iterationData.get(\"autor\"));\r",
+                  "pm.environment.set(\"tytul\", pm.iterationData.get(\"tytul\"));\r",
+                  "\r",
+                  "console.log(\"Autor: \", pm.environment.get(\"autor\"));\r",
+                  "console.log(\"Tytul: \", pm.environment.get(\"tytul\"));"
+                ],
+                "_lastExecutionId": "1955e5c8-ab4a-4e45-a96f-1d5f7a62865a"
+              }
+            }
+          ]
+        },
+        "request": {
+          "description": {
+            "content": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code.",
+            "type": "text/plain"
+          },
+          "url": {
+            "protocol": "http",
+            "port": "3000",
+            "path": [
+              "posts"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "system": true
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "0bd406bd-c67b-451a-80e1-5d9d60d35f6e",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:3000",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "77",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\n        \"title\": \"Przewieszenie\",\n        \"author\": \"Remigiusz Mróz\"\n    }",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "6f5296f1-85b1-4590-bc2d-5394175fc5e3",
+          "status": "Created",
+          "code": 201,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Vary",
+              "value": "Origin, X-HTTP-Method-Override, Accept-Encoding"
+            },
+            {
+              "key": "Access-Control-Allow-Credentials",
+              "value": "true"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "-1"
+            },
+            {
+              "key": "Access-Control-Expose-Headers",
+              "value": "Location"
+            },
+            {
+              "key": "Location",
+              "value": "http://localhost:3000/posts/HtOSbUO"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "80"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"50-c4LNqP9qs0ULKVeUmhWeV67R1ow\""
+            },
+            {
+              "key": "Date",
+              "value": "Mon, 14 Oct 2024 21:56:55 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              10,
+              32,
+              32,
+              34,
+              116,
+              105,
+              116,
+              108,
+              101,
+              34,
+              58,
+              32,
+              34,
+              80,
+              114,
+              122,
+              101,
+              119,
+              105,
+              101,
+              115,
+              122,
+              101,
+              110,
+              105,
+              101,
+              34,
+              44,
+              10,
+              32,
+              32,
+              34,
+              97,
+              117,
+              116,
+              104,
+              111,
+              114,
+              34,
+              58,
+              32,
+              34,
+              82,
+              101,
+              109,
+              105,
+              103,
+              105,
+              117,
+              115,
+              122,
+              32,
+              77,
+              114,
+              195,
+              179,
+              122,
+              34,
+              44,
+              10,
+              32,
+              32,
+              34,
+              105,
+              100,
+              34,
+              58,
+              32,
+              34,
+              72,
+              116,
+              79,
+              83,
+              98,
+              85,
+              79,
+              34,
+              10,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 37,
+          "responseSize": 80
+        },
+        "id": "daeca2eb-0a1c-4c7d-ba43-7455549717e4",
+        "assertions": [
+          {
+            "assertion": "Successful POST request",
+            "skipped": false
+          },
+          {
+            "assertion": "Check author",
+            "skipped": false
+          },
+          {
+            "assertion": "Check title",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "129447e6-77d2-4780-a80c-96fa26eedcfc",
+          "length": 1,
+          "cycles": 4,
+          "position": 0,
+          "iteration": 1,
+          "cr": true,
+          "httpRequestId": "32c8c9e0-6879-44e5-b5e1-c44e74164263"
+        },
+        "item": {
+          "id": "daeca2eb-0a1c-4c7d-ba43-7455549717e4",
+          "name": "Dodawanie posta z recenzją",
+          "request": {
+            "description": {
+              "content": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "http",
+              "port": "3000",
+              "path": [
+                "posts"
+              ],
+              "host": [
+                "localhost"
+              ],
+              "query": [
+                {
+                  "disabled": true,
+                  "key": "t",
+                  "value": null
+                }
+              ],
+              "variable": []
+            },
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n        \"title\": \"{{tytul}}\",\n        \"author\": \"{{autor}}\"\n    }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "12e4682c-732f-495e-af8d-1df86f311d49",
+                "type": "text/javascript",
+                "packages": {},
+                "exec": [
+                  "pm.test(\"Successful POST request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "});",
+                  "",
+                  "",
+                  "pm.test(\"Check author\", function(){",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.author).to.eql(pm.environment.get(\"autor\"));",
+                  "});",
+                  "",
+                  "pm.test(\"Check title\", function(){",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.title).to.eql(pm.environment.get(\"tytul\"));",
+                  "});"
+                ],
+                "_lastExecutionId": "f0b5f1b1-fd0e-45e8-b50e-b3f10eac5532"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "6bef130f-02fa-463a-b01a-8e345d88e917",
+                "type": "text/javascript",
+                "packages": {},
+                "exec": [
+                  "pm.environment.set(\"autor\", pm.iterationData.get(\"autor\"));\r",
+                  "pm.environment.set(\"tytul\", pm.iterationData.get(\"tytul\"));\r",
+                  "\r",
+                  "console.log(\"Autor: \", pm.environment.get(\"autor\"));\r",
+                  "console.log(\"Tytul: \", pm.environment.get(\"tytul\"));"
+                ],
+                "_lastExecutionId": "1955e5c8-ab4a-4e45-a96f-1d5f7a62865a"
+              }
+            }
+          ]
+        },
+        "request": {
+          "description": {
+            "content": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code.",
+            "type": "text/plain"
+          },
+          "url": {
+            "protocol": "http",
+            "port": "3000",
+            "path": [
+              "posts"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "system": true
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "95fb3802-6583-45d3-b251-a1670b16abe9",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:3000",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "69",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\n        \"title\": \"Halny\",\n        \"author\": \"Remigiusz Mróz\"\n    }",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "1fc23ee2-909d-41c3-a6db-8d06491fd69c",
+          "status": "Created",
+          "code": 201,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Vary",
+              "value": "Origin, X-HTTP-Method-Override, Accept-Encoding"
+            },
+            {
+              "key": "Access-Control-Allow-Credentials",
+              "value": "true"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "-1"
+            },
+            {
+              "key": "Access-Control-Expose-Headers",
+              "value": "Location"
+            },
+            {
+              "key": "Location",
+              "value": "http://localhost:3000/posts/U-KYUOG"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "72"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"48-BBPzefdyJ0mrZ4tLNWVx6clLALw\""
+            },
+            {
+              "key": "Date",
+              "value": "Mon, 14 Oct 2024 21:56:55 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              10,
+              32,
+              32,
+              34,
+              116,
+              105,
+              116,
+              108,
+              101,
+              34,
+              58,
+              32,
+              34,
+              72,
+              97,
+              108,
+              110,
+              121,
+              34,
+              44,
+              10,
+              32,
+              32,
+              34,
+              97,
+              117,
+              116,
+              104,
+              111,
+              114,
+              34,
+              58,
+              32,
+              34,
+              82,
+              101,
+              109,
+              105,
+              103,
+              105,
+              117,
+              115,
+              122,
+              32,
+              77,
+              114,
+              195,
+              179,
+              122,
+              34,
+              44,
+              10,
+              32,
+              32,
+              34,
+              105,
+              100,
+              34,
+              58,
+              32,
+              34,
+              85,
+              45,
+              75,
+              89,
+              85,
+              79,
+              71,
+              34,
+              10,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 34,
+          "responseSize": 72
+        },
+        "id": "daeca2eb-0a1c-4c7d-ba43-7455549717e4",
+        "assertions": [
+          {
+            "assertion": "Successful POST request",
+            "skipped": false
+          },
+          {
+            "assertion": "Check author",
+            "skipped": false
+          },
+          {
+            "assertion": "Check title",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "8d3f8eb4-7ab6-4895-9b6c-80974394f825",
+          "length": 1,
+          "cycles": 4,
+          "position": 0,
+          "iteration": 2,
+          "cr": true,
+          "httpRequestId": "5ca79ed3-5fa3-4ceb-a4b8-bd1c52a955f8"
+        },
+        "item": {
+          "id": "daeca2eb-0a1c-4c7d-ba43-7455549717e4",
+          "name": "Dodawanie posta z recenzją",
+          "request": {
+            "description": {
+              "content": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "http",
+              "port": "3000",
+              "path": [
+                "posts"
+              ],
+              "host": [
+                "localhost"
+              ],
+              "query": [
+                {
+                  "disabled": true,
+                  "key": "t",
+                  "value": null
+                }
+              ],
+              "variable": []
+            },
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n        \"title\": \"{{tytul}}\",\n        \"author\": \"{{autor}}\"\n    }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "12e4682c-732f-495e-af8d-1df86f311d49",
+                "type": "text/javascript",
+                "packages": {},
+                "exec": [
+                  "pm.test(\"Successful POST request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "});",
+                  "",
+                  "",
+                  "pm.test(\"Check author\", function(){",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.author).to.eql(pm.environment.get(\"autor\"));",
+                  "});",
+                  "",
+                  "pm.test(\"Check title\", function(){",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.title).to.eql(pm.environment.get(\"tytul\"));",
+                  "});"
+                ],
+                "_lastExecutionId": "f0b5f1b1-fd0e-45e8-b50e-b3f10eac5532"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "6bef130f-02fa-463a-b01a-8e345d88e917",
+                "type": "text/javascript",
+                "packages": {},
+                "exec": [
+                  "pm.environment.set(\"autor\", pm.iterationData.get(\"autor\"));\r",
+                  "pm.environment.set(\"tytul\", pm.iterationData.get(\"tytul\"));\r",
+                  "\r",
+                  "console.log(\"Autor: \", pm.environment.get(\"autor\"));\r",
+                  "console.log(\"Tytul: \", pm.environment.get(\"tytul\"));"
+                ],
+                "_lastExecutionId": "1955e5c8-ab4a-4e45-a96f-1d5f7a62865a"
+              }
+            }
+          ]
+        },
+        "request": {
+          "description": {
+            "content": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code.",
+            "type": "text/plain"
+          },
+          "url": {
+            "protocol": "http",
+            "port": "3000",
+            "path": [
+              "posts"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "system": true
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "34be4d83-58ac-48e5-b0c6-4366c52c7716",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:3000",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "75",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\n        \"title\": \"Iluzjonista\",\n        \"author\": \"Remigiusz Mróz\"\n    }",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "562c5aa3-1810-4bf1-a517-cc13cb7fa5dc",
+          "status": "Created",
+          "code": 201,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Vary",
+              "value": "Origin, X-HTTP-Method-Override, Accept-Encoding"
+            },
+            {
+              "key": "Access-Control-Allow-Credentials",
+              "value": "true"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "-1"
+            },
+            {
+              "key": "Access-Control-Expose-Headers",
+              "value": "Location"
+            },
+            {
+              "key": "Location",
+              "value": "http://localhost:3000/posts/C3vEnNM"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "78"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"4e-YlLtf5M0G1DWuk0Z20C/Y1B5zJs\""
+            },
+            {
+              "key": "Date",
+              "value": "Mon, 14 Oct 2024 21:56:55 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              10,
+              32,
+              32,
+              34,
+              116,
+              105,
+              116,
+              108,
+              101,
+              34,
+              58,
+              32,
+              34,
+              73,
+              108,
+              117,
+              122,
+              106,
+              111,
+              110,
+              105,
+              115,
+              116,
+              97,
+              34,
+              44,
+              10,
+              32,
+              32,
+              34,
+              97,
+              117,
+              116,
+              104,
+              111,
+              114,
+              34,
+              58,
+              32,
+              34,
+              82,
+              101,
+              109,
+              105,
+              103,
+              105,
+              117,
+              115,
+              122,
+              32,
+              77,
+              114,
+              195,
+              179,
+              122,
+              34,
+              44,
+              10,
+              32,
+              32,
+              34,
+              105,
+              100,
+              34,
+              58,
+              32,
+              34,
+              67,
+              51,
+              118,
+              69,
+              110,
+              78,
+              77,
+              34,
+              10,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 34,
+          "responseSize": 78
+        },
+        "id": "daeca2eb-0a1c-4c7d-ba43-7455549717e4",
+        "assertions": [
+          {
+            "assertion": "Successful POST request",
+            "skipped": false
+          },
+          {
+            "assertion": "Check author",
+            "skipped": false
+          },
+          {
+            "assertion": "Check title",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "0c1cbbfa-c36d-42ef-9fa1-cecf59c30912",
+          "length": 1,
+          "cycles": 4,
+          "position": 0,
+          "iteration": 3,
+          "cr": true,
+          "httpRequestId": "ad5138e2-5130-460b-9846-b3ec02bb0c12"
+        },
+        "item": {
+          "id": "daeca2eb-0a1c-4c7d-ba43-7455549717e4",
+          "name": "Dodawanie posta z recenzją",
+          "request": {
+            "description": {
+              "content": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "http",
+              "port": "3000",
+              "path": [
+                "posts"
+              ],
+              "host": [
+                "localhost"
+              ],
+              "query": [
+                {
+                  "disabled": true,
+                  "key": "t",
+                  "value": null
+                }
+              ],
+              "variable": []
+            },
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n        \"title\": \"{{tytul}}\",\n        \"author\": \"{{autor}}\"\n    }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "12e4682c-732f-495e-af8d-1df86f311d49",
+                "type": "text/javascript",
+                "packages": {},
+                "exec": [
+                  "pm.test(\"Successful POST request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "});",
+                  "",
+                  "",
+                  "pm.test(\"Check author\", function(){",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.author).to.eql(pm.environment.get(\"autor\"));",
+                  "});",
+                  "",
+                  "pm.test(\"Check title\", function(){",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.title).to.eql(pm.environment.get(\"tytul\"));",
+                  "});"
+                ],
+                "_lastExecutionId": "f0b5f1b1-fd0e-45e8-b50e-b3f10eac5532"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "6bef130f-02fa-463a-b01a-8e345d88e917",
+                "type": "text/javascript",
+                "packages": {},
+                "exec": [
+                  "pm.environment.set(\"autor\", pm.iterationData.get(\"autor\"));\r",
+                  "pm.environment.set(\"tytul\", pm.iterationData.get(\"tytul\"));\r",
+                  "\r",
+                  "console.log(\"Autor: \", pm.environment.get(\"autor\"));\r",
+                  "console.log(\"Tytul: \", pm.environment.get(\"tytul\"));"
+                ],
+                "_lastExecutionId": "1955e5c8-ab4a-4e45-a96f-1d5f7a62865a"
+              }
+            }
+          ]
+        },
+        "request": {
+          "description": {
+            "content": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code.",
+            "type": "text/plain"
+          },
+          "url": {
+            "protocol": "http",
+            "port": "3000",
+            "path": [
+              "posts"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "system": true
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "3c2f2e4d-90ce-4161-88eb-b284dbf9e030",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:3000",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "69",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\n        \"title\": \"Zerwa\",\n        \"author\": \"Remigiusz Mróz\"\n    }",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "2bb67761-be5a-4083-926f-98bdac0ada40",
+          "status": "Created",
+          "code": 201,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Vary",
+              "value": "Origin, X-HTTP-Method-Override, Accept-Encoding"
+            },
+            {
+              "key": "Access-Control-Allow-Credentials",
+              "value": "true"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache"
+            },
+            {
+              "key": "Pragma",
+              "value": "no-cache"
+            },
+            {
+              "key": "Expires",
+              "value": "-1"
+            },
+            {
+              "key": "Access-Control-Expose-Headers",
+              "value": "Location"
+            },
+            {
+              "key": "Location",
+              "value": "http://localhost:3000/posts/ctne1LA"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "72"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"48-AMitrSY6vSOvHj/pjEXTC4YRdl4\""
+            },
+            {
+              "key": "Date",
+              "value": "Mon, 14 Oct 2024 21:56:56 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              10,
+              32,
+              32,
+              34,
+              116,
+              105,
+              116,
+              108,
+              101,
+              34,
+              58,
+              32,
+              34,
+              90,
+              101,
+              114,
+              119,
+              97,
+              34,
+              44,
+              10,
+              32,
+              32,
+              34,
+              97,
+              117,
+              116,
+              104,
+              111,
+              114,
+              34,
+              58,
+              32,
+              34,
+              82,
+              101,
+              109,
+              105,
+              103,
+              105,
+              117,
+              115,
+              122,
+              32,
+              77,
+              114,
+              195,
+              179,
+              122,
+              34,
+              44,
+              10,
+              32,
+              32,
+              34,
+              105,
+              100,
+              34,
+              58,
+              32,
+              34,
+              99,
+              116,
+              110,
+              101,
+              49,
+              76,
+              65,
+              34,
+              10,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 35,
+          "responseSize": 72
+        },
+        "id": "daeca2eb-0a1c-4c7d-ba43-7455549717e4",
+        "assertions": [
+          {
+            "assertion": "Successful POST request",
+            "skipped": false
+          },
+          {
+            "assertion": "Check author",
+            "skipped": false
+          },
+          {
+            "assertion": "Check title",
+            "skipped": false
+          }
+        ]
+      }
+    ],
+    "transfers": {
+      "responseTotal": 302
+    },
+    "failures": [],
+    "error": null
+  }
+}
